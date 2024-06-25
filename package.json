@@ -1,0 +1,16 @@
+{
+  "name": "mystashtheme",
+  "version": "1.0.0",
+  "description": "Custom theming for StashApp to my personal taste.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run compile:scss && npm run copy:yml",
+    "compile:scss": "sass --no-source-map --style=compressed src/styles/index.scss dist/MyStashTheme.css",
+    "copy:yml": "node -e \"require('fs').cpSync('./src/source.yml', './dist/MyStashTheme.yml', {recursive: true});\""
+  },
+  "author": "Valkyr-JS",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.77.6"
+  }
+}
