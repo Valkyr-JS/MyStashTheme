@@ -1,0 +1,52 @@
+/* -------------------------------------------------------------------------- */
+/*                                  Hot Cards                                 */
+/* -------------------------------------------------------------------------- */
+
+// Hot Cards is a Stash CommunityScript plugin that offers a visual aid by
+// applying custom CSS to card elements based on a tag ID or a rating threshold.
+// You can use this plugin to remind yourself of certain performers, scenes,
+// studios, movies, images or galleries.
+
+$hot-border-color-1: #000328;
+$hot-border-color-2: #2a8076;
+$hot-border-color-3: #2c1265;
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 36, 9, 0);
+  }
+  70% {
+    box-shadow: 0px 0px 4px $hot-border-color-2, 0px 0px 8px $hot-border-color-2;
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 36, 9, 0);
+  }
+}
+
+@function codeToHSLA($code, $opacity: 1) {
+  $h: math.round(hue($code));
+  $s: math.round(saturation($code));
+  $l: math.round(lightness($code));
+
+  @if $opacity == 1 {
+    @return #{hsl($h, $s, $l)};
+  }
+  @return #{hsla($h, $s, $l, $opacity)};
+}
+
+.hot-border {
+  &::after {
+    background-image: linear-gradient(
+      60deg,
+      codeToHSLA($hot-border-color-1) 0%,
+      codeToHSLA($hot-border-color-2) 50%,
+      codeToHSLA($hot-border-color-3) 100%
+    ) !important;
+  }
+}
+
+.hot-card {
+  &:hover {
+    box-shadow: none !important;
+  }
+}
